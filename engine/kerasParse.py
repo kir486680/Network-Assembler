@@ -6,7 +6,8 @@ from keras.optimizers import Adam
 import numpy as np
 
 model = Sequential()
-
+def save(model):
+    model.save("my_model")
 def conv2D(model, params):
     if params["init"]:
         model.add(Conv2D(input_shape=(224,224,3),filters=params["filters"],kernel_size=params["kernel_size"],padding=params["padding"], activation=params["activation"]))

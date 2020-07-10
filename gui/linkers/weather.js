@@ -1,4 +1,5 @@
 let {PythonShell} = require('python-shell')
+const fs = require('fs');
 var path = require("path")
 
 
@@ -23,7 +24,9 @@ function get_weather() {
         "momentum" : 0.9,
         "optimizer": "Adam"
     }
-  }
+  };
+  var jsonContent = JSON.stringify(jsonData);
+  saveJson(jsonContent)
   var options = {
     scriptPath : path.join(__dirname, '/../engine/'),
     args : [city, jsonData]
@@ -36,4 +39,15 @@ function get_weather() {
     swal(message);
   })
   document.getElementById("city").value = "";
+}
+
+function saveJson(jsonData){
+  fs.writeFile("output.json", jsonData, 'utf8', function (err) {
+    if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+    }
+ 
+    console.log("JSON file has been saved.");
+});
 }

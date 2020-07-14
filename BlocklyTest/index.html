@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Blockly for the Web Codelab</title>
+
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  
+</head>
+
+<body mode="maker">
+<script src="https://unpkg.com/blockly"></script>
+<script src="sumorobot.js"></script>
+<div class="blockly-editor">
+    <div id="blocklyDiv" style="height: 480px; width: 400px;"></div>
+<xml id="toolbox" style="display: none">
+  
+  <block type="sumorobot_move"></block>
+  <block type="sumorobot_sleep"></block>
+  <block type="sumorobot_line"></block>
+  
+ 
+</xml>
+</div>
+<script>
+  var workspace = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')});
+</script>
+</body>
+</html>

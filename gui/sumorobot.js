@@ -1,6 +1,6 @@
 Blockly.Blocks['sumorobot_sleep'] = {
     init: function() {
-        this.setColour("#E64C00");
+        this.setColour("#338022");
         this.appendDummyInput()
           .appendField("sleep")
             .appendField(new Blockly.FieldTextInput('1000',
@@ -12,7 +12,7 @@ Blockly.Blocks['sumorobot_sleep'] = {
 
 Blockly.Blocks['max_pool'] = {
     init: function() {
-        this.setColour("#E64C00");
+        this.setColour("#32ab9c");
         this.appendDummyInput()
           .appendField("Max Pool")
             .appendField(new Blockly.FieldTextInput('2',
@@ -24,7 +24,7 @@ Blockly.Blocks['max_pool'] = {
 
 Blockly.Blocks['Dense'] = {
     init: function() {
-        this.setColour("#E64C00");
+        this.setColour("#80222a");
         this.appendDummyInput()
         .appendField("Dense")
         this.appendDummyInput()
@@ -61,7 +61,7 @@ Blockly.Blocks['DenseInit'] = {
 
 Blockly.Blocks['Input'] = {
     init: function() {
-        this.setColour("#E64C00");
+        this.setColour("#61581c");
         this.appendDummyInput()
         .appendField("Input")
         this.appendDummyInput()
@@ -89,7 +89,7 @@ Blockly.Blocks['Dropout'] = {
 
 Blockly.Blocks['flatten'] = {
     init: function() {
-        this.setColour("#E64C00");
+        this.setColour("#621e6b");
         this.appendDummyInput()
         .appendField("Flatten")
         this.setPreviousStatement(true);

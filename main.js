@@ -13,11 +13,11 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1000, height: 900})
+  mainWindow = new BrowserWindow({resizable: false, width: 1000, height: 900})
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '/gui/gui.html'),
+    pathname: path.join(__dirname, '/gui/index.html'),
     protocol: 'file:',
     slashes: true
   }))

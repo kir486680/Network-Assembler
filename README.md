@@ -4,8 +4,6 @@ Network Assembler allows you to make simple keras neural networks with simple GU
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
 ```bash
 !git clone https://github.com/kir486680/Network-Assembler.git
 npm start

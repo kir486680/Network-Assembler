@@ -18,31 +18,38 @@
 <script src="blockly_compressed.js"></script>
 <script src="python_compressed.js"></script>
 <script src="sumorobot.js"></script>
-<div class="row">
-  <div class="col-xs-9">
-  <div class="blockly-editor">
-    <div id="blocklyDiv" style="height: 800px; width: 100%%;" class="col-xs-12"></div>
-<xml id="toolbox" style="display: none">
 
-  <block type="sumorobot_move"></block>
-  <block type="sumorobot_sleep"></block>
-  <block type="sumorobot_line"></block>
+<div class="row">
+  <div class="col-xs-8">
+  <div class="blockly-editor">
+    <div id="blocklyDiv" style="height: 800px; width: 100%;" class="col-xs-6"></div>
+<xml id="toolbox" style="display: none">
+  <block type="Dense"></block>
+  <block type="Input"></block>
   <block type="flatten"></block>
   <block type="max_pool"></block>
    <block type="Conv2D"></block>
-   <block type="Conv2DInit"></block>
+   <block type="Dropout"></block>
 
 </xml>
 </div>
   </div>
-  <div class="col-xs-3"><textarea id="myTextarea" style="width: 100%;">
-342 Alvin Road
-Ducksburg</textarea></div>
+  <div id ="editor" class="col-xs-4" style="height: 800px; "></div>
 </div>
+
+
+
+
   <p>
     <button onclick="showCode()">Show JavaScript</button>
     <button onclick="runCode()">Run JavaScript</button>
   </p>
+  <script src="https://pagecdn.io/lib/ace/1.4.5/ace.js" integrity="sha256-5Xkhn3k/1rbXB+Q/DX/2RuAtaB4dRRyQvMs83prFjpM=" crossorigin="anonymous"></script>
+  <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/python");
+</script>
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {media: '../../media/',
@@ -53,8 +60,12 @@ Ducksburg</textarea></div>
       // Generate JavaScript code and display it.
       Blockly.Python.INFINITE_LOOP_TRAP = null;
       var code = Blockly.Python.workspaceToCode(demoWorkspace);
-      alert(code);
+      var output = "model = keras.Sequential(["
+       + code+
+       "])" 
+      editor.setValue(output);
     }
+    
   </script>
 </body>
 </html>

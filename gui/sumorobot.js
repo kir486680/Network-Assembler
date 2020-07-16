@@ -17,12 +17,75 @@ Blockly.Blocks['max_pool'] = {
           .appendField("Max Pool")
             .appendField(new Blockly.FieldTextInput('2',
               Blockly.FieldNumber.numberValidator), 'POOL');
-        
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
 };
 
+Blockly.Blocks['Dense'] = {
+    init: function() {
+        this.setColour("#E64C00");
+        this.appendDummyInput()
+        .appendField("Dense")
+        this.appendDummyInput()
+          .appendField("Nodes")
+            .appendField(new Blockly.FieldTextInput('8',
+              Blockly.FieldNumber.numberValidator), 'nodes')
+              .appendField("Activation")
+              .appendField(new Blockly.FieldTextInput('"relu"',
+                Blockly.FieldNumber.numberValidator), 'activation');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Blocks['DenseInit'] = {
+    init: function() {
+        this.setColour("#E64C00");
+        this.appendDummyInput()
+        .appendField("Dense Input")
+        this.appendDummyInput()
+        .appendField("Input Shape")
+        .appendField(new Blockly.FieldTextInput('64,64,3',
+        Blockly.FieldNumber.numberValidator), 'InputShape')
+          .appendField("Nodes")
+            .appendField(new Blockly.FieldTextInput('8',
+              Blockly.FieldNumber.numberValidator), 'nodes')
+              .appendField("Activation")
+              .appendField(new Blockly.FieldTextInput('"relu"',
+                Blockly.FieldNumber.numberValidator), 'activation');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Blocks['Input'] = {
+    init: function() {
+        this.setColour("#E64C00");
+        this.appendDummyInput()
+        .appendField("Input")
+        this.appendDummyInput()
+        .appendField("Input Shape")
+        .appendField(new Blockly.FieldTextInput('"16,"',
+        Blockly.FieldNumber.numberValidator), 'InputShape')
+
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Blocks['Dropout'] = {
+    init: function() {
+        this.setColour("#E64C00");
+        this.appendDummyInput()
+        .appendField("Dropout")
+        .appendField(new Blockly.FieldTextInput('0.25',
+        Blockly.FieldNumber.numberValidator), 'Dropout')
+
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
 
 Blockly.Blocks['flatten'] = {
     init: function() {
@@ -38,7 +101,7 @@ Blockly.Blocks['Conv2DInit'] = {
     init: function() {
         this.setColour("#E64C00");
         this.appendDummyInput()
-        .appendField("Conv2D Init")
+        .appendField("Conv2D Input")
         this.appendDummyInput()
         .appendField("Input Shape")
         .appendField(new Blockly.FieldTextInput('64,64,3',
@@ -83,60 +146,31 @@ Blockly.Blocks['Conv2D'] = {
         this.setNextStatement(true);
     }
 }
-Blockly.Blocks['sumorobot_move'] = {
-    init: function() {
-        var OPERATORS = [
-            ['move stop', 'STOP'],
-            ['move left', 'LEFT'],
-            ['move right', 'RIGHT'],
-            ['move forward', 'FORWARD'],
-            ['move backward', 'BACKWARD']
-        ];
-        this.setColour("#E60000");
-        var dropdown = new Blockly.FieldDropdown(OPERATORS);
-        this.appendDummyInput().appendField(dropdown, 'MOVE');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-    }
-};
 
-Blockly.Blocks['sumorobot_opponent'] = {
-    init: function() {
-        this.setColour("#0099E6");
-        this.appendDummyInput().appendField('opponent');
-        this.setOutput(true, 'Boolean');
-    }
-};
-
-Blockly.Blocks['sumorobot_line'] = {
-    init: function() {
-        var OPERATORS = [
-            ['line left', 'LEFT'],
-            ['line right', 'RIGHT']
-        ];
-        this.setColour("#E6BF00");
-        var dropdown = new Blockly.FieldDropdown(OPERATORS);
-        this.appendDummyInput().appendField(dropdown, 'LINE');
-        this.setOutput(true, 'Boolean');
-    }
-};
-
-Blockly.Python['sumorobot_sleep'] = function(block) {
-    var code = 'sumorobot.sleep(' + parseFloat(block.getFieldValue('SLEEP')) + ', "' + block.id + '")\n';
+Blockly.Python['flatten'] = function(block) {
+    var code = 'layers.Flatten(),'
     return code;
 };
 
-Blockly.Python['sumorobot_move'] = function(block) {
-    var code = 'sumorobot.move(' + block.getFieldValue('MOVE') + ', "' + block.id + '")\n';
+Blockly.Python['Conv2D'] = function(block) {
+    var code = 'layers.Conv2D(filters='+block.getFieldValue('Filters') +',kernel_size='+block.getFieldValue('KernelSize')+',padding='+block.getFieldValue('Padding')+', activation=' +block.getFieldValue('Activation')+')),'
     return code;
 };
 
-Blockly.Python['sumorobot_opponent'] = function(block) {
-    var code = 'sumorobot.is_opponent("' + block.id + '")';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+Blockly.Python['max_pool'] = function(block) {
+    var code = 'layers.MaxPooling2D(pool_size=(' + block.getFieldValue('POOL')+',' + block.getFieldValue('POOL')+'))),'
+    return code;
+};
+Blockly.Python['Dense'] = function(block) {
+    var code = 'layers.Dense(' + block.getFieldValue('nodes')+', activation=' + block.getFieldValue('activation')+')),'
+    return code;
 };
 
-Blockly.Python['sumorobot_line'] = function(block) {
-    var code = 'sumorobot.is_line(' + block.getFieldValue('LINE') + ', "' + block.id + '")';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+Blockly.Python['Input'] = function(block) {
+    var code = 'keras.Input(shape=(' + block.getFieldValue('InputShape') + '))),'
+    return code;
+};
+Blockly.Python['Dropout'] = function(block) {
+    var code = 'layers.Dropout(' + block.getFieldValue('Dropout') + '),'
+    return code;
 };

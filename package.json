@@ -1,7 +1,7 @@
 {
-  "name": "python-app-with-electron-gui",
+  "name": "Network-Assembler",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "This is an app that helps you create keras  NN models",
   "main": "main.js",
   "scripts": {
     "start": "electron ."

@@ -7,13 +7,6 @@ city = sys.argv[1]
 jsonData = sys.argv[2]
 print(jsonData)
 
-def get_weather(place):
-    place = place.replace(" ", "-")
-    url = "https://www.weather-forecast.com/locations/" + place + "/forecasts/latest"
-    r = requests.get(url)
-    soup = bs(r.content, "lxml")
-    weather = soup.findAll("span", {"class": "phrase"})[0].text
-    return weather
 
 def createJson():
     jsonData = {
@@ -35,6 +28,5 @@ def createJson():
             "optimizer": "Adam"
         }
     }
-#print(jsonData["modelLib"])
-print(get_weather(city))
+print(jsonData["modelLib"])
 sys.stdout.flush()
